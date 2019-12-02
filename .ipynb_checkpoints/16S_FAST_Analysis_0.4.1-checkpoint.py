@@ -293,19 +293,11 @@ tmp, df_cut_info = cut_fa_by_len.cut_fa_by_len(merge_fa,merge_filter_fa,
                                                args.minlength,args.maxlength)
 sta_list.append(['No. Contigs filtered(1200-1700bp):',tmp])
 df_cut_info.to_csv(ID_info,sep='\t')
-df_asv = get_asv_seq_from_fasta.get_asv_seq_from_fasta(
-    merge_filter_fa,args.name,asv_fa,'asv')
-df_asv = pd.merge(
-    df_cut_info,
-    df_asv,
-    left_index=True,
-    right_on='Seq_ID').set_index('Seq_ID')
+df_asv = get_asv_seq_from_fasta.get_asv_seq_from_fasta(merge_filter_fa,args.name,outf,tag)
+df_asv = pd.merge(df_cut_info,df_asv,left_index=True,right_on='Seq_ID').set_index('Seq_ID')
 df_asv.to_csv(ID_info,sep='\t')
 
-submit_mothur.submit_mothur(asv_fa,mothur_db_fa,mothur_db_tax,mothur,threads)
-asv_fa_tax = (re.search(r'(.*)\.fasta',asv_fa).group(1) + 
-              re.search(r'(\..*)\.tax',mothur_db_tax).group(1) + 
-              '.wang.taxonomy')
+
 
 print(pd.DataFrame(sta_list))
 
