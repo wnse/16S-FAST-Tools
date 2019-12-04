@@ -79,13 +79,16 @@ L2 = args.Linker_Read_2
 cmd_path = '/Bioinfo/bin/'
 bin_path = '/root/anaconda3/bin/'
 db_path = '/Bioinfo/Database/'
+
 bowtie_db = db_path + '16S_BSI/GM_BSI_v3'
 bowtie_db_taxon_map_file = db_path + 'GM_BSI_v3_taxon_map.txt'
 mothur_db_fa = db_path + 'mothur/silva_132_v3.fa'
 mothur_db_tax = db_path + 'mothur/silva_132_v3.2.tax'
+
 spades = bin_path + 'spades.py'
 bowtie2 = bin_path + 'bowtie2'
 cutadapt = bin_path + 'cutadapt'
+
 mothur = cmd_path + 'mothur'
 
 a_adapter = ('file:' + os.path.join(sys.path[0] + '/adapter/adapter.fa'))
@@ -293,12 +296,24 @@ tmp, df_cut_info = cut_fa_by_len.cut_fa_by_len(merge_fa,merge_filter_fa,
                                                args.minlength,args.maxlength)
 sta_list.append(['No. Contigs filtered(1200-1700bp):',tmp])
 df_cut_info.to_csv(ID_info,sep='\t')
-df_asv = get_asv_seq_from_fasta.get_asv_seq_from_fasta(merge_filter_fa,args.name,outf,tag)
-df_asv = pd.merge(df_cut_info,df_asv,left_index=True,right_on='Seq_ID').set_index('Seq_ID')
+
+submit_mothur.submit_mothur(merge_filter_fa,mothur_db_fa,mothur_db_tax,mothur,threads)
+tax_file = (re.search(r'(.*)\.fasta',merge_filter_fa).group(1) + 
+              re.search(r'(\..*)\.tax',mothur_db_tax).group(1) + 
+              '.wang.taxonomy')
+df_consensus, df_unconsensus = get_consensus_seq_from_mothur.get_consensus_seq_from_mothur(
+    tax_file,merge_filter_fa)
+
+'''
+df_asv = get_asv_seq_from_fasta.get_asv_seq_from_fasta(
+    merge_filter_fa,args.name,asv_fa,'asv')
+df_asv = pd.merge(
+    df_cut_info,
+    df_asv,
+    left_index=True,
+    right_on='Seq_ID').set_index('Seq_ID')
 df_asv.to_csv(ID_info,sep='\t')
-
-
-
+'''
 print(pd.DataFrame(sta_list))
 
 
