@@ -13,7 +13,7 @@ import os
 import re
 import sys
 from . import mkdir
-
+# import mkdir
 
 def spades_sub(file_list):
     file = file_list[0]
@@ -53,27 +53,27 @@ def assemble(file_list,out_dir,log_dir,spades_path,threads=1,):
     #tmp_file_list=list(file_list)[:]
     ass_success=0
     ass_failed=0
+    mkdir.mkdir(out_dir)
+    mkdir.mkdir(log_dir)
+    queu_file=[]
     for f in file_list:
-        queu_file=[]
-        mkdir.mkdir(out_dir)
-        mkdir.mkdir(log_dir)
         f_name = os.path.splitext(os.path.basename(f))[0]
         spades_tmp_dir = os.path.join(out_dir,f_name)
         logfile = os.path.join(log_dir,f_name)
         queu_file.append([f,spades_tmp_dir,logfile,spades_path])
-        pool = multiprocessing.Pool(processes=threads)
-        spades_return = pool.map_async(spades_sub,queu_file)
-        spades_return.wait()
+    pool = multiprocessing.Pool(processes=threads)
+    spades_return = pool.map_async(spades_sub,queu_file)
+    spades_return.wait()
 
-        if spades_return.ready():
-            for get in spades_return.get():
-                if get == 0:
-                    ass_success += 1
-                else:
-                    ass_failed += 1
+    if spades_return.ready():
+        for get in spades_return.get():
+            if get == 0:
+                ass_success += 1
+            else:
+                ass_failed += 1
         
-        pool.close()
-        pool.join()
+    pool.close()
+    pool.join()
     return ass_success,ass_failed
 
     

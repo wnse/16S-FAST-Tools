@@ -138,3 +138,195 @@ Assertion failed: rc == 0 (src/socket_poller.cpp:41)
 [I 16:25:16.787 LabApp] Saving file at /script/assemble_fastq_from_list.py
 [I 16:25:16.964 LabApp] Saving file at /script/assemble_fastq_from_list.py
 [I 16:25:17.112 LabApp] Saving file at /script/assemble_fastq_from_list.py
+[I 10:27:24.069 LabApp] JupyterLab extension loaded from /root/anaconda3/lib/python3.7/site-packages/jupyterlab
+[I 10:27:24.090 LabApp] JupyterLab application directory is /root/anaconda3/share/jupyter/lab
+[I 10:27:24.093 LabApp] 启动notebooks 在本地路径: /mnt/data/work/script/16S-FAST-Tools
+[I 10:27:24.093 LabApp] 本程序运行在: http://i-bpvvrd7e:8888/?token=c70eebc637e7fde80bb0bc02514386141f3bf63c22892303
+[I 10:27:24.093 LabApp]  or http://127.0.0.1:8888/?token=c70eebc637e7fde80bb0bc02514386141f3bf63c22892303
+[I 10:27:24.093 LabApp] 使用control-c停止此服务器并关闭所有内核(两次跳过确认).
+[W 10:27:24.104 LabApp] 没有找到web浏览器: could not locate runnable browser.
+[C 10:27:24.104 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-1681-open.html
+    Or copy and paste one of these URLs:
+        http://i-bpvvrd7e:8888/?token=c70eebc637e7fde80bb0bc02514386141f3bf63c22892303
+     or http://127.0.0.1:8888/?token=c70eebc637e7fde80bb0bc02514386141f3bf63c22892303
+[I 10:27:46.019 LabApp] 302 GET / (192.168.255.254) 1.97ms
+[W 10:27:47.664 LabApp] Could not determine jupyterlab build status without nodejs
+[W 10:27:48.728 LabApp] 404 GET /api/contents/script/%E6%9C%AA%E5%91%BD%E5%90%8D.ipynb?content=0&1575512868603 (192.168.255.254): No such file or directory: script/未命名.ipynb
+[W 10:27:48.728 LabApp] No such file or directory: script/未命名.ipynb
+[W 10:27:48.729 LabApp] 404 GET /api/contents/script/%E6%9C%AA%E5%91%BD%E5%90%8D.ipynb?content=0&1575512868603 (192.168.255.254) 10.89ms referer=http://192.168.10.8:8888/lab?
+[I 10:32:06.304 LabApp] Saving file at /script/merge_contigs.py
+[I 10:34:07.981 LabApp] Saving file at /script/merge_contigs.py
+[I 10:34:52.494 LabApp] Saving file at /script/merge_contigs.py
+[I 10:34:52.724 LabApp] Saving file at /script/merge_contigs.py
+[I 10:40:40.519 LabApp] Saving file at /script/merge_contigs.py
+[I 10:40:45.118 LabApp] Saving file at /script/merge_contigs.py
+[I 10:42:36.070 LabApp] Saving file at /script/merge_contigs.py
+[I 10:44:12.963 LabApp] Saving file at /script/merge_contigs.py
+[I 10:45:13.298 LabApp] Saving file at /script/merge_contigs.py
+[I 10:45:13.514 LabApp] Saving file at /script/merge_contigs.py
+[I 10:47:52.773 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 10:49:52.925 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 10:50:01.253 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 10:52:01.521 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 10:54:04.564 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 10:54:16.821 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 11:10:50.599 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:12:50.701 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:14:50.780 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:16:50.838 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:16:52.096 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:17:02.690 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:18:24.664 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 11:44:37.845 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 11:46:14.604 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[W 11:46:37.858 LabApp] Notebook raw.ipynb is not trusted
+[I 11:46:38.139 LabApp] Kernel started: f48c7126-1afc-4dca-95d2-38ba77382b38
+[I 11:46:39.704 LabApp] Adapting from protocol version 5.1 (kernel f48c7126-1afc-4dca-95d2-38ba77382b38) to 5.3 (client).
+[I 11:46:39.754 LabApp] Adapting from protocol version 5.1 (kernel f48c7126-1afc-4dca-95d2-38ba77382b38) to 5.3 (client).
+[I 11:48:38.030 LabApp] Saving file at /raw.ipynb
+[I 11:50:38.370 LabApp] Saving file at /raw.ipynb
+[I 11:51:07.019 LabApp] Saving file at /script/submit_cutadapt.py
+[I 11:52:38.463 LabApp] Saving file at /raw.ipynb
+[I 11:54:38.594 LabApp] Saving file at /raw.ipynb
+================================================================
+Program: CD-HIT, V4.8.1, Mar 01 2019, 14:14:47
+Command: /root/anaconda3/bin/cd-hit -i
+         ../../test_16S_FAST_v4/test_out/merged.filter.new.fasta
+         -o
+         ../../test_16S_FAST_v4/test_out/merged.filter.new.cdhit.fasta
+         -c 1
+
+Started: Thu Dec  5 11:54:38 2019
+================================================================
+                            Output                              
+----------------------------------------------------------------
+total seq: 610
+longest and shortest : 1786 and 1203
+Total letters: 855291
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 0M
+Buffer          : 1 X 10M = 10M
+Table           : 1 X 65M = 65M
+Miscellaneous   : 0M
+Total           : 77M
+
+Table limit with the given memory limit:
+Max number of representatives: 480994
+Max number of word counting entries: 90353946
+
+comparing sequences from          0  to        610
+
+      610  finished        455  clusters
+
+Approximated maximum memory consumption: 79M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 1.05
+================================================================
+Program: CD-HIT, V4.8.1, Mar 01 2019, 14:14:47
+Command: /root/anaconda3/bin/cd-hit -i
+         ../../test_16S_FAST_v4/test_out/merged.filter.new.fasta
+         -o
+         ../../test_16S_FAST_v4/test_out/merged.filter.new.cdhit.fasta
+         -c 1
+
+Started: Thu Dec  5 11:54:57 2019
+================================================================
+                            Output                              
+----------------------------------------------------------------
+total seq: 610
+longest and shortest : 1786 and 1203
+Total letters: 855291
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 0M
+Buffer          : 1 X 10M = 10M
+Table           : 1 X 65M = 65M
+Miscellaneous   : 0M
+Total           : 77M
+
+Table limit with the given memory limit:
+Max number of representatives: 480994
+Max number of word counting entries: 90353946
+
+comparing sequences from          0  to        610
+
+      610  finished        455  clusters
+
+Approximated maximum memory consumption: 79M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 1.03
+[I 11:56:39.312 LabApp] Saving file at /raw.ipynb
+[I 11:58:39.416 LabApp] Saving file at /raw.ipynb
+[I 12:00:39.577 LabApp] Saving file at /raw.ipynb
+[I 12:02:32.485 LabApp] Saving file at /raw.ipynb
+[I 12:03:33.205 LabApp] Saving file at /script/__init__.py
+[I 12:04:05.885 LabApp] Saving file at /script/__init__.py
+[I 12:04:15.004 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:04:32.599 LabApp] Saving file at /raw.ipynb
+[I 12:05:03.123 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:05:57.652 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:05:58.157 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:06:54.726 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:07:49.087 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:09:50.099 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:10:40.495 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:10:40.701 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[C 12:12:34.568 LabApp] 接受信号 15, 正在停止
+[I 12:12:34.570 LabApp] 关闭 1 服务
+[I 12:12:34.674 LabApp] Kernel shutdown: f48c7126-1afc-4dca-95d2-38ba77382b38
+[I 12:14:15.714 LabApp] JupyterLab extension loaded from /root/anaconda3/lib/python3.7/site-packages/jupyterlab
+[I 12:14:15.812 LabApp] JupyterLab application directory is /root/anaconda3/share/jupyter/lab
+[I 12:14:15.816 LabApp] 启动notebooks 在本地路径: /mnt/data/work/script/16S-FAST-Tools
+[I 12:14:15.817 LabApp] 本程序运行在: http://i-bpvvrd7e:8888/?token=506ac700283a038df75bf14ac6d8259db8ccc115c7c1321e
+[I 12:14:15.817 LabApp]  or http://127.0.0.1:8888/?token=506ac700283a038df75bf14ac6d8259db8ccc115c7c1321e
+[I 12:14:15.817 LabApp] 使用control-c停止此服务器并关闭所有内核(两次跳过确认).
+[W 12:14:15.829 LabApp] 没有找到web浏览器: could not locate runnable browser.
+[C 12:14:15.829 LabApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-1275-open.html
+    Or copy and paste one of these URLs:
+        http://i-bpvvrd7e:8888/?token=506ac700283a038df75bf14ac6d8259db8ccc115c7c1321e
+     or http://127.0.0.1:8888/?token=506ac700283a038df75bf14ac6d8259db8ccc115c7c1321e
+[W 12:14:50.145 LabApp] Could not determine jupyterlab build status without nodejs
+[I 12:14:51.493 LabApp] Kernel started: a1e351a5-3b05-4825-a594-3944a68e05c0
+[I 12:14:52.824 LabApp] Adapting from protocol version 5.1 (kernel a1e351a5-3b05-4825-a594-3944a68e05c0) to 5.3 (client).
+[I 12:14:52.862 LabApp] Adapting from protocol version 5.1 (kernel a1e351a5-3b05-4825-a594-3944a68e05c0) to 5.3 (client).
+[I 12:14:59.375 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:14:59.604 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:16:31.395 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:18:17.603 LabApp] Saving file at /script/assemble_fastq_from_list.py
+[I 12:18:17.752 LabApp] Saving file at /script/assemble_fastq_from_list.py
+[I 12:21:00.723 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:23:42.386 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:24:23.825 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:26:58.667 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:26:58.901 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:29:22.803 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:33:24.565 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:34:37.624 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:38:01.197 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 12:39:53.126 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 12:41:25.127 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 12:41:26.738 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 12:41:52.912 LabApp] Saving file at /script/cut_fa_by_len.py
+[I 12:42:37.972 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:42:38.194 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 12:42:41.676 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 13:48:51.577 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 13:49:05.639 LabApp] Saving file at /16S_FAST_Analysis_0.4.1.py
+[I 14:13:26.760 LabApp] Shutting down on /api/shutdown request.
+[I 14:13:26.765 LabApp] 关闭 1 服务
+[I 14:13:27.068 LabApp] Kernel shutdown: a1e351a5-3b05-4825-a594-3944a68e05c0

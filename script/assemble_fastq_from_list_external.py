@@ -12,8 +12,8 @@ import multiprocessing
 import os
 import re
 import sys
-from . import mkdir
-# import mkdir
+#from . import mkdir
+import mkdir
 
 def spades_sub(file_list):
     file = file_list[0]

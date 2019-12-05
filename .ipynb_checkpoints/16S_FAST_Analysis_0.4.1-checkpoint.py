@@ -10,6 +10,7 @@ import argparse
 import logging
 import os
 import sys
+import re
 import numpy as np
 import pandas as pd
 from Bio import SeqIO
@@ -17,7 +18,7 @@ from Bio import SeqIO
 from script import *
 
 logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',level='INFO')
-__version__ = "0.3.1_20191009"
+__version__ = "0.4_20191205"
 logging.info(' version: {}'.format(__version__))
 logging.info(' script path:{}'.format(sys.path[0]))
 
@@ -51,15 +52,19 @@ parser.add_argument('-minl','--minlength',default=1200,type=int,
 parser.add_argument('-maxl','--maxlength',default=0,type=int,
                     help='Maximum length of contigs filtered,0 means no limits')
 
-raw_data_dir = '/root/test/rawdata/'
-output_dir = '/root/test/test'
+raw_data_dir = '/mnt/data/work/test_16S_FAST_v4/rawdata/'
+output_dir = '/mnt/data/work/test_16S_FAST_v4/test_out'
+# args = parser.parse_args(['-ar1',os.path.join(raw_data_dir,'test_P_1.fq.gz'),
+#                           '-ar2',os.path.join(raw_data_dir,'test_P_2.fq.gz'),
+#                           '-lr1',os.path.join(raw_data_dir,'test_L_1.fq.gz'),
+#                           '-lr2',os.path.join(raw_data_dir,'test_L_2.fq.gz'),
 args = parser.parse_args(['-ar1',os.path.join(raw_data_dir,'FL-P_BKDL190814481-1a-AK3457-A26_1.fq.gz'),
                           '-ar2',os.path.join(raw_data_dir,'FL-P_BKDL190814481-1a-AK3457-A26_2.fq.gz'),
                           '-lr1',os.path.join(raw_data_dir,'FL-L_BKDL190814481-1a-AK2926-A26_1.fq.gz'),
-                          '-lr2',os.path.join(raw_data_dir,'FL-L_BKDL190814481-1a-AK2926-A26_2.fq.gz'),
+                          '-lr2',os.path.join(raw_data_dir,'FL-L_BKDL190814481-1a-AK2926-A26_2.fq.gz'), 
                           '-o',output_dir,
-                          '-pc','50',
-                          '-c','7',
+                          '-pc','6',
+                          '-c','14',
                           '-minl','1200',
                           '-maxl','1700'])
 
@@ -78,7 +83,7 @@ L2 = args.Linker_Read_2
 
 cmd_path = '/Bioinfo/bin/'
 bin_path = '/root/anaconda3/bin/'
-db_path = '/Bioinfo/Database/'
+db_path = '/Bioinfo/Database/Silva_132_v3/'
 
 bowtie_db = db_path + '16S_BSI/GM_BSI_v3'
 bowtie_db_taxon_map_file = db_path + 'GM_BSI_v3_taxon_map.txt'
@@ -88,6 +93,7 @@ mothur_db_tax = db_path + 'mothur/silva_132_v3.2.tax'
 spades = bin_path + 'spades.py'
 bowtie2 = bin_path + 'bowtie2'
 cutadapt = bin_path + 'cutadapt'
+cdhit = bin_path + 'cd-hit'
 
 mothur = cmd_path + 'mothur'
 
@@ -277,8 +283,12 @@ for tmp_dir in os.listdir(umi_seq_dir):
 
 sta_list.append(['No.of UMI_ID success assembled:',tmp_list[0]])
 
-merge_fa = os.path.join(result_dir,'merged.fasta')
-merge_fa_info = os.path.join(result_dir,'merged.fasta.info')
+merge_fa = os.path.join(ana_dir,'merged.fasta')
+merge_fa_info = os.path.join(ana_dir,'merged.fasta.info')
+merge_trim_fa1 = os.path.join(ana_dir,'merged.trim1.fasta')
+merge_trim_log1 = os.path.join(ana_dir,'merged.trim1.log')
+merge_trim_fa2 = os.path.join(ana_dir,'merged.trim2.fasta')
+merge_trim_log2 = os.path.join(ana_dir,'merged.trim2.log')
 merge_filter_fa = os.path.join(result_dir,'merged.filter.fasta')
 ID_info = os.path.join(result_dir ,'asv.id.info')
 asv_fa = os.path.join(result_dir,'asv.fasta')
@@ -292,17 +302,24 @@ for tmpdir in os.listdir(spades_path):
     
 df_merge_fa = merge_contigs.merge_contigs(assemble_list,merge_fa)
 df_merge_fa.to_csv(merge_fa_info,sep='\t')
-tmp, df_cut_info = cut_fa_by_len.cut_fa_by_len(merge_fa,merge_filter_fa,
+
+submit_cutadapt.submit_cutadapt(merge_fa, merge_trim_fa1, merge_trim_log1,file_primer_rc,'a',cutadapt,threads)
+submit_cutadapt.submit_cutadapt(merge_trim_fa1, merge_trim_fa2, merge_trim_log2,file_primer, 'g',cutadapt,threads)
+
+tmp, df_cut_info = cut_fa_by_len.cut_fa_by_len(merge_trim_fa2,merge_filter_fa,
                                                args.minlength,args.maxlength)
 sta_list.append(['No. Contigs filtered(1200-1700bp):',tmp])
 df_cut_info.to_csv(ID_info,sep='\t')
 
-submit_mothur.submit_mothur(merge_filter_fa,mothur_db_fa,mothur_db_tax,mothur,threads)
-tax_file = (re.search(r'(.*)\.fasta',merge_filter_fa).group(1) + 
+#cdhit 100%
+submit_cdhit.submit_cdhit(merge_filter_fa, asv_fa, 1, cdhit, threads)
+
+submit_mothur.submit_mothur(asv_fa,mothur_db_fa,mothur_db_tax,mothur,threads)
+tax_file = (re.search(r'(.*)\.fasta',asv_fa).group(1) + 
               re.search(r'(\..*)\.tax',mothur_db_tax).group(1) + 
               '.wang.taxonomy')
 df_consensus, df_unconsensus = get_consensus_seq_from_mothur.get_consensus_seq_from_mothur(
-    tax_file,merge_filter_fa)
+    tax_file,asv_fa)
 
 '''
 df_asv = get_asv_seq_from_fasta.get_asv_seq_from_fasta(
@@ -315,7 +332,6 @@ df_asv = pd.merge(
 df_asv.to_csv(ID_info,sep='\t')
 '''
 print(pd.DataFrame(sta_list))
-
 
 
 

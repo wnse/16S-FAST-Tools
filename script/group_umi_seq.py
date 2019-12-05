@@ -9,6 +9,7 @@ import argparse
 import logging
 import os
 import sys
+import gzip
 import pandas as pd
 import multiprocessing
 from Bio import SeqIO
