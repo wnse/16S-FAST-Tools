@@ -45,6 +45,8 @@ parser.add_argument('-minl','--minlength',default=1200,type=int,
                     help='Minimum length of contigs filtered')
 parser.add_argument('-maxl','--maxlength',default=0,type=int,
                     help='Maximum length of contigs filtered,0 means no limits')
+parser.add_argument('-group','--group',action='store_true',help='keep group umi seq in result')
+parser.add_argument('-debug','--debug',action='store_true',help='not delete all processing files')
 
 #raw_data_dir = '/mnt/data/work/test_16S_FAST_v4/rawdata/'
 #output_dir = '/mnt/data/work/test_16S_FAST_v4/test_out_1211'
@@ -429,6 +431,15 @@ get_tax_from_mothur_with_level.get_tax_from_mothur_with_level(tax_file,
                                                               final_tab,
                                                               tax_ratio_file,
                                                               tax_reads_file)
+
+if args.group:
+  #os.system(' '.join(['mv', umi_seq_dir, result_dir
+  
+if not args.debug:
+  
+
+
+
 logging.info(' All Finishied!')
 
 
