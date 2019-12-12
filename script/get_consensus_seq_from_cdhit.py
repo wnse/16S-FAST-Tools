@@ -38,12 +38,14 @@ def get_consensus_seq_from_cdhit(clstr,fa,outfa):
     # 在每个cluster中选择最长序列为代表序列
     rep_seq_size = {}
     rep_seq_seqs = {}
+    total_size = 0
     for cl, seqs in cl2seq.items():
         tmp = [seqLen[i] for i in seqs]
         rep_seq = seqs[tmp.index(max(tmp))]
         rep_seq_size[rep_seq] = len(seqs)
+        total_size += len(seqs)
         rep_seq_seqs[rep_seq] = seqs
-    # 按照cluster大小顺序输出代表序列，并修改序列id
+    # 按照cluster大小顺序输出代表序列
     rep_seq = []
     rep_seq_tab = []
     tmp_seq  = SeqIO.to_dict(SeqIO.parse(fa, 'fasta'))
@@ -57,7 +59,7 @@ def get_consensus_seq_from_cdhit(clstr,fa,outfa):
         rep_seq_tab.append([seq.id, size,'|'.join(rep_seq_seqs[i])])
         n+=1
     count = SeqIO.write(rep_seq,outfa,'fasta')
-    return count, rep_seq_tab
+    return total_size, rep_seq_tab
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

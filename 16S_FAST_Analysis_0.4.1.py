@@ -368,6 +368,7 @@ tmp = cut_fa_by_len.cut_fa_by_len(merge_trim_fa2,
                                   merge_filter_fa,
                                   args.minlength,
                                   args.maxlength)
+logging.info(' No. of Contigs after length filtered({}-{}):\t{}'.format(args.minlength, args.maxlength, tmp))
 sta_list.append(['No. of Contigs after length filtered('+str(args.minlength)+'-'+str(args.maxlength)+'bp):',tmp])
 
 #聚类
@@ -446,7 +447,7 @@ if args.group:
         t_dir = os.path.join(target_dir, u[0:2])
         mkdir.mkdir(t_dir)
         os.system(' '.join(['/usr/bin/mv', file_path[u], t_dir]))
-    os.system(' '.join(['/usr/bin/tar', target_dir+'.tar.gz', target_dir]))
+    os.system(' '.join(['/usr/bin/tar', '-czf', target_dir+'.tar.gz', target_dir]))
     os.system(' '.join(['/usr/bin/rm', target_dir]))
     df_ID_info.to_csv(ID_info, sep='\t')
     
