@@ -11,4 +11,5 @@ __all__=['mkdir','submit_cutadapt','get_L_UMI','define_UMI_ID',
          'plot_seq2umi','assemble_fastq_from_list','plot_contig_coverage',
          'merge_contigs','cut_fa_by_len','submit_mothur',
         'get_consensus_seq_from_mothur','submit_cdhit','remove_chimeras_uchime',
-        'get_consensus_seq_from_cdhit']
+        'get_consensus_seq_from_cdhit','submit_Trimmomatic_SE','update_seqID',
+        'get_tax_from_mothur_with_level']

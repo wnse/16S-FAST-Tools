@@ -22,19 +22,14 @@ def get_L_UMI(LR1,LR2):
             seq2 = '*'
         u = seq1 + '|' + seq2
         umiL[u] = umiL.get(u,0)+1
-    df = pd.DataFrame.from_dict(umiL,
-                                orient='index',
-                                columns=(['counts_of_paire'])).reset_index()
+    df = pd.DataFrame.from_dict(umiL,orient='index',columns=(['counts_of_paire'])).reset_index()
     df['u1'],df['u2'] = df['index'].str.split('|').str
     dfu1 = df.groupby(['u1']).sum().rename(columns={'counts_of_paire':'u1_reads'})
     dfu2 = df.groupby(['u2']).sum().rename(columns={'counts_of_paire':'u2_reads'})
     df = pd.merge(df,dfu1,left_on='u1',right_index=True,how='left')
     df = pd.merge(df,dfu2,left_on='u2',right_index=True,how='left')
     #df = df[~df['index'].str.contains('\*')]
-    df = df.sort_values(by='counts_of_paire',
-                        ascending=False).drop('index',
-                                              axis=1).reset_index().drop('index',
-                                                                         axis=1)
+    df = df.sort_values(by='counts_of_paire',ascending=False).drop('index',axis=1).reset_index().drop('index',axis=1)
     return df
 
 if __name__ == '__main__':

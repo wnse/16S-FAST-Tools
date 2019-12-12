@@ -30,30 +30,29 @@ def submit_cutadapt(in_file,out_file,log_file,adapter,g_a,path,threads=1,info=0)
 
 if __name__ == '__main__':
     
-    parser = argparse.ArgumentParser(description=\
-                                     'this is for trimming adapter of fasta \
-                                     using cutadapt')
-    parser.add_argument('-fq','--fastq',\
+    parser = argparse.ArgumentParser(description=('this is for trimming adapter of fasta'
+                                     'using cutadapt'))
+    parser.add_argument('-fq','--fastq',
                         help='input fastq',required=True)
-    parser.add_argument('-o','--out_fastq',\
+    parser.add_argument('-o','--out_fastq',
                         help='output fastq',required=True)
-    parser.add_argument('-l','--log_file',\
+    parser.add_argument('-l','--log_file',
                         help='output log file. default=out_fastq.log',default='')
-    parser.add_argument('-a','--adapter',\
+    parser.add_argument('-a','--adapter',
                         help='adapter sequences',required=True)
-    parser.add_argument('-d','--direction',\
-                        help="g(5') or a(3') for trimming. default=a.",\
+    parser.add_argument('-d','--direction',
+                        help="g(5') or a(3') for trimming. default=a.",
                         choices=['g','a'],default='a')
-    parser.add_argument('-t','--threads',\
-                        help='threads for computing. default=out_fastq.log',\
+    parser.add_argument('-t','--threads',
+                        help='threads for computing. default=out_fastq.log',
                         default=1,type=int)
-    parser.add_argument('-i','--info',\
+    parser.add_argument('-i','--info',
                         help='output info file named out_fastq.cutadapt.info.file,\
-                        if set -i,threads not useful',\
+                        if set -i,threads not useful',
                         action="store_true")
-    parser.add_argument('-path','--path',\
-                        help='cutadapt absolute path,\
-                        default=/Bio/bin/cutadapt',\
+    parser.add_argument('-path','--path',
+                        help=('cutadapt absolute path,'
+                        'default=/Bio/bin/cutadapt'),
                         default='/Bio/bin/cutadapt')
     
     args = parser.parse_args()

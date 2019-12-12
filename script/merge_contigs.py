@@ -21,7 +21,7 @@ def merge_contigs(contig_list,merge_fa_name):
             tmp = []
             n = 0
             for seq in SeqIO.parse(fa,'fasta'):
-                seq.description = str(name) + "_" + str(seq.description)
+                seq.description = str(name) + "|" + str(seq.description)
                 seq.id = str(m) + '_' + str(n)
                 tmp.append(seq)
                 n += 1
@@ -29,7 +29,7 @@ def merge_contigs(contig_list,merge_fa_name):
             seq_no_dict[name] = [m,seq_no]
             m += 1
     return pd.DataFrame.from_dict(seq_no_dict,orient='index',
-                                  columns=(['Seq_ID','NO._of_Contigs']))
+                                  columns=(['umi_id','NO._of_Contigs']))
 
 if __name__ == '__main__':
     parse = argparse.ArgumentParser(description='merge contig fastas in a dir')

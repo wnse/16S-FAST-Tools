@@ -23,24 +23,25 @@ def spades_sub(file_list):
     cmd = spades_path + ' --s1 ' + file + ' -o ' + outdir + ' -t 1 ' \
                         +' 1>' + logfile + ' 2>' + logfile
     tmp_sys = os.system(cmd)
-#    rm_cmd = '/bin/rm -rf outdir/assembly_graph* \
-#                            outdir/before_rr.fasta \
-#                            outdir/contigs.paths \
-#                            outdir/corrected \
-#                            outdir/dataset.info \
-#                            outdir/input_dataset.yaml \
-#                            outdir/misc \
-#                            outdir/K* \
-#                            outdir/params.txt \
-#                            outdir/tmp  \
-#                            outdir/scaffolds.* \
-#                            outdir/spades.log \
-#                            outdir/warnings.log \
-#                            outdir/configs '
-#    try:
-#        tmp_sys_rm = os.system(re.sub('outdir',outdir,rm_cmd))
-#    except OSError as e:
-#        logging.info('rm error {} - {}'.format(e.filename,e.strerror))
+    rm_cmd = ('/bin/rm -rf outdir/assembly_graph* '
+              'outdir/before_rr.fasta '
+              'outdir/contigs.paths '
+              'outdir/corrected '
+              'outdir/dataset.info '
+              'outdir/input_dataset.yaml '
+              'outdir/misc '
+              'outdir/K* ' 
+              'outdir/params.txt ' 
+              'outdir/tmp ' 
+              'outdir/scaffolds.* ' 
+              'outdir/spades.log '
+              'outdir/warnings.log '
+              'outdir/configs '
+             )
+    try:
+        tmp_sys_rm = os.system(re.sub('outdir',outdir,rm_cmd))
+    except OSError as e:
+        logging.info('rm error {} - {}'.format(e.filename,e.strerror))
     return tmp_sys
 
 

@@ -89,10 +89,8 @@ def corresponding_seq2umi(adapter_info_file,primer_info_file,umi_dict):
 
     sta_list.append(['No. of paired UMIs in A data',tmp1])
     sta_list.append(['No. of unpaired UMIs in A data',tmp2])
-    sta_list.append(['\tNo. of A seq of paired UMI',tmp3])
-    sta_list.append(['\tRatio of A seq of paired UMI',tmp3/total_seq])
-    sta_list.append(['\tNo. of A seq of unpaired UMI',tmp4])
-    sta_list.append(['\tRatio of A seq of unpaired UMI',tmp4/total_seq])
+    sta_list.append(['No. of A seq of paired UMI',tmp3])
+    sta_list.append(['No. of A seq of unpaired UMI',tmp4])
     
     return aUMI,sta_list
     
