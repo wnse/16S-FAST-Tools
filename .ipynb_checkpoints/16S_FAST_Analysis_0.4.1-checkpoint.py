@@ -10,6 +10,7 @@ import argparse
 import logging
 import os
 import sys
+import shutil
 import re
 import numpy as np
 import pandas as pd
@@ -45,25 +46,27 @@ parser.add_argument('-minl','--minlength',default=1200,type=int,
                     help='Minimum length of contigs filtered')
 parser.add_argument('-maxl','--maxlength',default=0,type=int,
                     help='Maximum length of contigs filtered,0 means no limits')
-
+parser.add_argument('-group','--group',action='store_true',help='keep group umi seq in result')
+parser.add_argument('-debug','--debug',action='store_true',help='not delete all processing files')
+args = parser.parse_args()
 #raw_data_dir = '/mnt/data/work/test_16S_FAST_v4/rawdata/'
 #output_dir = '/mnt/data/work/test_16S_FAST_v4/test_out_1211'
 #args = parser.parse_args(['-ar1',os.path.join(raw_data_dir,'test_P_1.fq.gz'),
 #                          '-ar2',os.path.join(raw_data_dir,'test_P_2.fq.gz'),
 #                          '-lr1',os.path.join(raw_data_dir,'test_L_1.fq.gz'),
 #                          '-lr2',os.path.join(raw_data_dir,'test_L_2.fq.gz'),
-raw_data_dir = '/mnt/data/16S-FAST_data/20191209/rawdata/'  
-output_dir = '/mnt/data/work/test_16S_FAST_v4/test_out_LJ_new'
-args = parser.parse_args(['-ar1',os.path.join(raw_data_dir,'LJ-P_S33_L008_R1_001.fastq.gz'),
-                          '-ar2',os.path.join(raw_data_dir,'LJ-P_S33_L008_R2_001.fastq.gz'),
-                          '-lr1',os.path.join(raw_data_dir,'LJ-L_S34_L008_R1_001.fastq.gz'),
-                          '-lr2',os.path.join(raw_data_dir,'LJ-L_S34_L008_R2_001.fastq.gz'), 
-                          '-o',output_dir,
-                          '-pc','3',
-                          '-c','24',
-                          '-minl','800',
-                          '-maxl','1700',
-                          '-n','LJ'])
+# raw_data_dir = '/mnt/data/16S-FAST_data/20191209/rawdata/'  
+# output_dir = '/mnt/data/work/test_16S_FAST_v4/test_out_LJ_new'
+# args = parser.parse_args(['-ar1',os.path.join(raw_data_dir,'LJ-P_S33_L008_R1_001.fastq.gz'),
+#                           '-ar2',os.path.join(raw_data_dir,'LJ-P_S33_L008_R2_001.fastq.gz'),
+#                           '-lr1',os.path.join(raw_data_dir,'LJ-L_S34_L008_R1_001.fastq.gz'),
+#                           '-lr2',os.path.join(raw_data_dir,'LJ-L_S34_L008_R2_001.fastq.gz'), 
+#                           '-o',output_dir,
+#                           '-pc','3',
+#                           '-c','24',
+#                           '-minl','800',
+#                           '-maxl','1700',
+#                           '-n','LJ'])
 
 logging.info(' {}'.format(args.__dict__))
 
@@ -400,11 +403,11 @@ df_update_id = pd.DataFrame.from_dict(dict_update_id,
                                       orient='index', 
                                       columns=(['contig_id']))
 df_update_id['umi_id'] = pd.to_numeric(df_update_id['contig_id'].str.split('_').str[0])
-pd.merge(df_update_id, 
-         df_merge_fa.reset_index().rename(columns={'index':'umiID'}), 
-         left_on='umi_id', 
-         right_on='umi_id', 
-         how='left').to_csv(ID_info,sep='\t')
+df_ID_info = pd.merge(df_update_id, 
+                      df_merge_fa.reset_index().rename(columns={'index':'umiID'}), 
+                      left_on='umi_id', 
+                      right_on='umi_id', 
+                      how='left')
 # 生成cluster size表格
 tab_list = []
 for i in SeqIO.parse(final_fa, 'fasta'):
@@ -429,6 +432,26 @@ get_tax_from_mothur_with_level.get_tax_from_mothur_with_level(tax_file,
                                                               final_tab,
                                                               tax_ratio_file,
                                                               tax_reads_file)
+if args.group:
+    target_dir = os.path.join(result_dir, File_Tag+'_umiID_Reads')
+    mkdir.mkdir(target_dir)
+    file_path = {}
+    for tmpdir in os.listdir(umi_seq_dir):
+        path = os.path.join(umi_seq_dir, tmpdir)
+        for file in os.listdir(path):
+            f = os.path.splitext(file)[0]
+            file_path[f] = os.path.join(path, file)
+    for u in df_ID_info['umiID'].to_list():
+        t_dir = os.path.join(target_dir, u[0:2])
+        mkdir.mkdir(t_dir)
+        os.system(' '.join(['/usr/bin/mv', file_path[u], t_dir]))
+    os.system(' '.join(['/usr/bin/tar', target_dir+'.tar.gz', target_dir]))
+    os.system(' '.join(['/usr/bin/rm', target_dir]))
+    df_ID_info.to_csv(ID_info, sep='\t')
+    
+if not args.debug:
+    shutil.rmtree(ana_dir)
+    df_ID_info.to_csv(ID_info, sep='\t')
 logging.info(' All Finishied!')
 
 
