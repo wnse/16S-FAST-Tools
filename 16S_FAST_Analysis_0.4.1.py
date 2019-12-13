@@ -333,9 +333,9 @@ clust_fa_clstr_table = os.path.join(ana_dir, File_Tag+'.clust.clstr.info')
 clust_uchimeout = os.path.join(ana_dir, File_Tag+'.clust.uchimeout.out.txt')
 clust_ch_fa = os.path.join(ana_dir, File_Tag+'.clust.ch.fasta')
 clust_nonch_fa = os.path.join(ana_dir, File_Tag+'.clust.nonch.fasta')
-final_fa = os.path.join(result_dir, File_Tag+'.final.fasta')
-final_tab = os.path.join(result_dir, File_Tag+'.final.size.tab.txt')
-ID_info = os.path.join(result_dir, File_Tag+'.final.id.info')
+final_fa = os.path.join(result_dir, 'final.fasta')
+final_tab = os.path.join(result_dir, 'final.size.tab.txt')
+ID_info = os.path.join(result_dir, 'final.id.info')
 
 #合并组装后的contigs
 assemble_list = []
@@ -428,8 +428,8 @@ submit_mothur.submit_mothur(final_fa, mothur_db_fa, mothur_db_tax, mothur, threa
 tax_file = (re.search(r'(.*)\.fasta',final_fa).group(1) + 
               re.search(r'(\..*)\.tax',mothur_db_tax).group(1) + 
               '.wang.taxonomy')
-tax_ratio_file = os.path.join(result_dir, File_Tag+'.tax.ratio.xlsx')
-tax_reads_file = os.path.join(result_dir, File_Tag+'.tax.reads.xlsx')
+tax_ratio_file = os.path.join(result_dir, 'tax.ratio.xlsx')
+tax_reads_file = os.path.join(result_dir, 'tax.reads.xlsx')
 get_tax_from_mothur_with_level.get_tax_from_mothur_with_level(tax_file,
                                                               final_tab,
                                                               tax_ratio_file,
