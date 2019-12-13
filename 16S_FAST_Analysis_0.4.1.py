@@ -415,7 +415,7 @@ total_cluster = 0
 for i in SeqIO.parse(final_fa, 'fasta'):
     size = re.search('size=(\d+)', i.description).group(1)
     tab_list.append([i.id, size])
-    total_size += size
+    total_size += int(size)
     total_cluster += 1
 pd.DataFrame(tab_list, columns=(['id', File_Tag])).set_index('id').to_csv(final_tab, sep='\t')
 sta_list.append(['22 No. of Cluster after remove Chimerias:',total_cluster])
