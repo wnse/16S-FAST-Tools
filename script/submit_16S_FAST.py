@@ -13,8 +13,8 @@ def submit_16S_FAST(ar1,ar2,lr1,lr2,remark,name,result_path='/mnt/data/yangkai/1
                 '-o', '${outdir}',
                 '-n', name,
                 '-c', str(16), 
-               # '-minl', '1200', 
-               # '-maxl', '1700'
+                '-minl', '1200', 
+                '-maxl', '1700'
                ]
     if group == 1:
         cmd_list.append('-group')

@@ -180,11 +180,11 @@ logging.info(' No. of L seqs found UMI(R1):\t{}'.format(L_R1_UMI_seq))
 logging.info(' No. of UMIs in L data(R1):\t{}'.format(L_R1_UMI))
 logging.info(' No. of L seqs found UMI(R2):\t{}'.format(L_R2_UMI_seq))
 logging.info(' No. of UMIs in L data(R2):\t{}'.format(L_R2_UMI))
-sta_list.append(['No. of L seqs:',L_seq])
-sta_list.append(['No. of L seqs found UMI(R1):',L_R1_UMI_seq])
-sta_list.append(['No. of UMIs in L data(R1):',L_R1_UMI])
-sta_list.append(['No. of L seqs found UMI(R2):',L_R2_UMI_seq])
-sta_list.append(['No. of UMIs in L data(R2):',L_R2_UMI])
+sta_list.append(['1 No. of L seqs:',L_seq])
+sta_list.append(['2 No. of L seqs found UMI(R1):',L_R1_UMI_seq])
+sta_list.append(['3 No. of UMIs in L data(R1):',L_R1_UMI])
+sta_list.append(['4 No. of L seqs found UMI(R2):',L_R2_UMI_seq])
+sta_list.append(['5 No. of UMIs in L data(R2):',L_R2_UMI])
 
 df_L_UMI_INFO = df_L_UMI_INFO[~ ((df_L_UMI_INFO['u1'].str.contains('\*')) 
                                  |(df_L_UMI_INFO['u2'].str.contains('\*')))]
@@ -227,10 +227,10 @@ logging.info(' No. of UMI ID in L data:\t{}'.format(tmp1))
 logging.info(' No. of UMI pairs in L data:\t{}'.format(tmp2))
 logging.info(' No. of paired UMIs in L data(R1):\t{}'.format(tmp3))
 logging.info(' No. of paired UMIs in L data(R2):\t{}'.format(tmp4))
-sta_list.append(['No. of UMI ID in L data:',tmp1])
-sta_list.append(['No. of UMI pairs in L data:',tmp2])
-sta_list.append(['No. of paired UMIs in L data(R1):',tmp3])
-sta_list.append(['No. of paired UMIs in L data(R2):',tmp4])
+sta_list.append(['6 No. of UMI ID in L data:',tmp1])
+sta_list.append(['7 No. of UMI pairs in L data:',tmp2])
+sta_list.append(['8 No. of paired UMIs in L data(R1):',tmp3])
+sta_list.append(['9 No. of paired UMIs in L data(R2):',tmp4])
 # 获取拼接文库中seq_id与umi对应关系
 seq2umi,tmp_list = corresponding_seq2umi.corresponding_seq2umi(A2_cut_adapter_info,
                                                                A2_umi_file_info,
@@ -282,8 +282,8 @@ df_L_UMI_INFO.fillna(0,inplace=True)
 df_L_UMI_INFO.to_csv(L_UMI_ID_FILE,sep='\t',index=False)
 logging.info(' No. of A reads after trimme:\t{}'.format(umi2seq[-1][-3]))
 logging.info(' No. of UMI ID appeared in A data:\t{}'.format(umi2seq[-1][-1]))
-sta_list.append(['No. of A reads after trimme:',umi2seq[-1][-3]])
-sta_list.append(['No.of UMI ID appeared in A data:',umi2seq[-1][-1]])
+sta_list.append(['11 No. of A reads after trimme:',umi2seq[-1][-3]])
+sta_list.append(['17 No. of UMI ID appeared in A data:',umi2seq[-1][-1]])
 #序列与umiID的关系图
 umi2seq_fig = os.path.join(result_dir,File_Tag+'.umi2seq.pdf')
 umi2seq_csv = os.path.join(result_dir,File_Tag+'.umi2seq.csv')
@@ -315,7 +315,7 @@ for tmp_dir in os.listdir(umi_seq_dir):
                                                       spades,threads))
 assmble_suc = [i[0] for i in tmp_list]
 logging.info(' No.of Contigs assembled:\t{}'.format(sum(assmble_suc)))
-sta_list.append(['No.of Contigs assembled:',sum(assmble_suc)])
+sta_list.append(['18 No. of Contigs assembled:',sum(assmble_suc)])
 if sum(assmble_suc) == 0:
     sys.exit('No Contigs!')
 #组装后contig处理
@@ -369,7 +369,7 @@ tmp = cut_fa_by_len.cut_fa_by_len(merge_trim_fa2,
                                   args.minlength,
                                   args.maxlength)
 logging.info(' No. of Contigs after length filtered({}-{}):\t{}'.format(args.minlength, args.maxlength, tmp))
-sta_list.append(['No. of Contigs after length filtered('+str(args.minlength)+'-'+str(args.maxlength)+'bp):',tmp])
+sta_list.append(['19 No. of Contigs after length filtered('+str(args.minlength)+'-'+str(args.maxlength)+'bp):',tmp])
 
 #聚类
 #100%相似度 cd-hit
@@ -383,8 +383,8 @@ consensus_seq_count, rep_seq_tab = get_consensus_seq_from_cdhit.get_consensus_se
     merge_filter_cluster_fa+'.clstr', 
     merge_filter_fa, 
     clust_fa)
-sta_list.append(['No. of Contigs after clust filter:',consensus_seq_count])
-sta_list.append(['No. of Cluster:',len(rep_seq_tab)])
+sta_list.append(['20 No. of Contigs after clust filter:',consensus_seq_count])
+sta_list.append(['21 No. of Cluster:',len(rep_seq_tab)])
 pd.DataFrame(rep_seq_tab,
              columns=(['clust_rep_id','size','seq_id'])).to_csv(clust_fa_clstr_table, 
                                                               sep='\t',
@@ -395,8 +395,6 @@ remove_chimeras_uchime.remove_chimeras_uchime(clust_fa,
                                               clust_ch_fa,
                                               clust_nonch_fa,
                                               usearch)
-sta_list.append(['No. of Cluster after remove Chimerias:',
-                 len(list(SeqIO.parse(clust_nonch_fa,'fasta')))])
 # 重新命名序列
 dict_update_id = update_seqID.update_seqID(clust_nonch_fa, 
                                            final_fa, 
@@ -405,17 +403,23 @@ df_update_id = pd.DataFrame.from_dict(dict_update_id,
                                       orient='index', 
                                       columns=(['contig_id']))
 df_update_id['umi_id'] = pd.to_numeric(df_update_id['contig_id'].str.split('_').str[0])
-df_ID_info = pd.merge(df_update_id, 
+df_ID_info = pd.merge(df_update_id.reset_index().rename(columns={'index':'ID'}), 
                       df_merge_fa.reset_index().rename(columns={'index':'umiID'}), 
                       left_on='umi_id', 
                       right_on='umi_id', 
                       how='left')
 # 生成cluster size表格
 tab_list = []
+total_size = 0
+total_cluster = 0
 for i in SeqIO.parse(final_fa, 'fasta'):
     size = re.search('size=(\d+)', i.description).group(1)
     tab_list.append([i.id, size])
+    total_size += size
+    total_cluster += 1
 pd.DataFrame(tab_list, columns=(['id', File_Tag])).set_index('id').to_csv(final_tab, sep='\t')
+sta_list.append(['22 No. of Cluster after remove Chimerias:',total_cluster])
+sta_list.append(['23 No. of Contigs after remove Chimerias:',total_size])
 # 生成统计表
 sta_file = os.path.join(result_dir, 'sta.txt')
 pd.DataFrame(sta_list,

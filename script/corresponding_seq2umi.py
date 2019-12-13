@@ -35,7 +35,7 @@ def corresponding_seq2umi(adapter_info_file,primer_info_file,umi_dict):
     
     logging.info(' No. of A seq:\t{:d}'.format(total_seq))
     logging.info(' No. of A seq with adapters:\t{}'.format(n))
-    sta_list.append(['No. of A seq',total_seq])
+    sta_list.append(['10 No. of A seq',total_seq])
     
     n = 0
     m = 0 
@@ -67,7 +67,7 @@ def corresponding_seq2umi(adapter_info_file,primer_info_file,umi_dict):
     
     for k,v in type_seq.items():
         logging.info(' No. of A reads with adapter|linker({}):\t{}'.format(k,v))
-        sta_list.append(['No. of A reads with adapter|linker({' + k + '})',v])
+        sta_list.append(['12 No. of A reads with adapter|linker({' + k + '})',v])
     
     df_unpaired_umi = pd.DataFrame.from_dict(umi_seq_unpaired,orient='index').reset_index()
     try:
@@ -87,10 +87,10 @@ def corresponding_seq2umi(adapter_info_file,primer_info_file,umi_dict):
     logging.info(' No. of A seq of unpaired UMI:\t{:d}({:.2f}%)'.format(tmp4,tmp4*100/total_seq))
     
 
-    sta_list.append(['No. of paired UMIs in A data',tmp1])
-    sta_list.append(['No. of unpaired UMIs in A data',tmp2])
-    sta_list.append(['No. of A seq of paired UMI',tmp3])
-    sta_list.append(['No. of A seq of unpaired UMI',tmp4])
+    sta_list.append(['13 No. of paired UMIs in A data',tmp1])
+    sta_list.append(['14 No. of unpaired UMIs in A data',tmp2])
+    sta_list.append(['15 No. of A seq of paired UMI',tmp3])
+    sta_list.append(['16 No. of A seq of unpaired UMI',tmp4])
     
     return aUMI,sta_list
     
