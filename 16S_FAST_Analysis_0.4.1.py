@@ -447,8 +447,8 @@ if args.group:
         t_dir = os.path.join(target_dir, u[0:2])
         mkdir.mkdir(t_dir)
         os.system(' '.join(['/usr/bin/mv', file_path[u], t_dir]))
-    os.system(' '.join(['/usr/bin/tar', '-czf', target_dir+'.tar.gz', target_dir]))
-    os.system(' '.join(['/usr/bin/rm', target_dir]))
+    os.system(' '.join(['/usr/bin/tar', 'czfP', target_dir+'.tar.gz', target_dir]))
+    os.system(' '.join(['/usr/bin/rm','-r',  target_dir]))
     df_ID_info.to_csv(ID_info, sep='\t')
     
 if not args.debug:
