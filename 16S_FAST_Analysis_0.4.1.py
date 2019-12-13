@@ -417,7 +417,7 @@ for i in SeqIO.parse(final_fa, 'fasta'):
     tab_list.append([i.id, size])
 pd.DataFrame(tab_list, columns=(['id', File_Tag])).set_index('id').to_csv(final_tab, sep='\t')
 # 生成统计表
-sta_file = os.path.join(result_dir, File_Tag+'.sta.txt')
+sta_file = os.path.join(result_dir, 'sta.txt')
 pd.DataFrame(sta_list,
              columns=(['description', File_Tag])).to_csv(sta_file, 
                                                          sep='\t', 
