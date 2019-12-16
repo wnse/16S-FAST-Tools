@@ -22,7 +22,7 @@ __version__ = "0.4_20191205"
 logging.info(' version: {}'.format(__version__))
 logging.info(' script path:{}'.format(sys.path[0]))
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
 parser.add_argument('-ar1','--Assemble_Read_1',required=True,
@@ -38,7 +38,7 @@ parser.add_argument('-o','--out_dir',required=True,
 parser.add_argument('-n','--name',default='test',
                     help='File name prefix',)
 parser.add_argument('-c','--CPUs',type=int,default=4,
-                    help='Number of CPUs. default 4',)
+                    help='Number of CPUs.',)
 parser.add_argument('-pc','--umi_pair_cutoff',type=int,default=1,
                     help='Minimum number of paired umis appeared in Linker '
                     'data.',)
