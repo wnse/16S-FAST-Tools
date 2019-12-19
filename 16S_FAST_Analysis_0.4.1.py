@@ -19,8 +19,6 @@ from script import *
 
 logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',level='INFO')
 __version__ = "0.4_20191205"
-logging.info(' version: {}'.format(__version__))
-logging.info(' script path:{}'.format(sys.path[0]))
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--version', action='version',
@@ -68,6 +66,8 @@ args = parser.parse_args()
 #                           '-maxl','1700',
 #                           '-n','LJ'])
 
+logging.info(' version: {}'.format(__version__))
+logging.info(' script path:{}'.format(sys.path[0]))
 logging.info(' {}'.format(args.__dict__))
 
 umi_paire_min_counts = args.umi_pair_cutoff
@@ -150,6 +150,7 @@ submit_cutadapt.submit_cutadapt(A2_cut_adapter,A2_umi_file,A2_umi_file_log,
                                 a_linker,'g',cutadapt,info=1)
 # 过滤拼接文库低质量
 A1_trime = os.path.join(ana_dir, 'A1.fastq.gz')
+logging.info(' trim A low quality start')
 submit_Trimmomatic_SE.submit_Trimmomatic_SE(A1, 
                                             A1_trime, 
                                             trimmomatic, 

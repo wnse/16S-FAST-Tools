@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Nov  1 14:32:45 2019
-
+根据去除引物和接头的连接文库序列，统计连接文库的umi对应关系和数量
+序列长度等于14为umi，否则为*
 @author: yk
 """
 import argparse
@@ -11,6 +12,14 @@ import pandas as pd
 from Bio import SeqIO
 
 def get_L_UMI(LR1,LR2):
+    '''
+    根据去除引物和接头的连接文库序列，统计连接文库的umi对应关系和数量
+    参数：
+        LR1: 连接文库去除接头和引物的R1数据（type=dict）
+        LR2: 连接文库去除接头和引物的R2数据（type=dict）
+    返回：
+        df: 统计信息（type=pandas）
+    '''
     umiL = {}
     for idx in LR1.keys():
         seq1=str(LR1[idx].seq)
@@ -30,7 +39,6 @@ def get_L_UMI(LR1,LR2):
     dfu2 = df.groupby(['u2']).sum().rename(columns={'counts_of_paire':'u2_reads'})
     df = pd.merge(df,dfu1,left_on='u1',right_index=True,how='left')
     df = pd.merge(df,dfu2,left_on='u2',right_index=True,how='left')
-    #df = df[~df['index'].str.contains('\*')]
     df = df.sort_values(by='counts_of_paire',
                         ascending=False).drop('index',
                                               axis=1).reset_index().drop('index',
@@ -39,16 +47,17 @@ def get_L_UMI(LR1,LR2):
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',level=logging.INFO)
-    parse = argparse.ArgumentParser(description='get L data UMI from paired *cut_primer.fq,\
-                                    which have been remove adapter and primers. get all umi seqs \
-                                    which length equal 14 nt.')
-    parse.add_argument('-f1','--fastq1',required=True,help='forward fastq(R1)')
-    parse.add_argument('-f2','--fastq2',required=True,help='reverse fastq(R2)')
-    parse.add_argument('-o','--output',default='L_UMI_INFO.txt',help='output txt file. default=L_UMI_INFO.txt')
+    parse = argparse.ArgumentParser(description=('get L data UMI from paired *cut_primer.fq'
+                                    'which have been remove adapter and primers. get all umi seqs'
+                                    'which length equal 14 nt.'),
+                                    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parse.add_argument('-f1', '--fastq1', required=True, help='forward fastq(R1)')
+    parse.add_argument('-f2', '--fastq2', required=True, help='reverse fastq(R2)')
+    parse.add_argument('-o', '--output', help='output txt file. default=L_UMI_INFO.txt')
     args = parse.parse_args()
     
     logging.info(' L UMI fastq:R1=({}) R2=({})'.format(args.fastq1,args.fastq2))
-    LR1_tmp=SeqIO.to_dict(SeqIO.parse(args.fastq1,'fastq'))
-    LR2_tmp=SeqIO.to_dict(SeqIO.parse(args.fastq2,'fastq'))
-    df_out = get_L_UMI(LR1_tmp,LR2_tmp)
-    df_out.to_csv(args.output,sep='\t')
+    LR1_tmp=SeqIO.to_dict(SeqIO.parse(args.fastq1, 'fastq'))
+    LR2_tmp=SeqIO.to_dict(SeqIO.parse(args.fastq2, 'fastq'))
+    df_out = get_L_UMI(LR1_tmp, LR2_tmp)
+    df_out.to_csv(args.output, sep='\t')
