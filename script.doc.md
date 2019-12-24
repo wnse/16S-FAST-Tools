@@ -1,16 +1,16 @@
 ### mkdir:
 
-- NAME
+- NAME  
       mkdir - Created on Fri Nov  1 10:04:10 2019
 
-- DESCRIPTION
+- DESCRIPTION  
       @author: yk
 
-- FUNCTIONS
-      mkdir(dir_name)
+- FUNCTIONS  
+      mkdir(dir_name)  
           建立目录
 
-- FILE
+- FILE  
       script/mkdir.py
 
 
@@ -34,7 +34,7 @@
                 g_a: 去除方式（g/a）
                 path: cutadapt路径
                 threads: 进程数
-                info: 是否输出每条序列的接头信息
+                info: 是否输出每条序列的接头信息  
             返回：
                 无
 
