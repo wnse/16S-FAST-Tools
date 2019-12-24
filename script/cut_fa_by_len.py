@@ -11,7 +11,15 @@ from Bio import SeqIO
 
 
 def cut_fa_by_len(input_fa, output_fa, min_len=0, max_len=0):
-    '''筛选fasta文件符合长度要求的序列'''
+    '''筛选fasta文件符合长度要求的序列
+    参数：
+        input_fa: 输入fasta文件
+        output_fa: 输出fasta文件
+        min_len: 序列最小长度
+        max_len: 序列最大长度
+    返回：
+        c: 过滤后序列数量
+    '''
     tmp = []
     if max_len == 0:
         for seq in SeqIO.parse(input_fa, 'fasta'):

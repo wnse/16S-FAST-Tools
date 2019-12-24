@@ -11,7 +11,6 @@ import logging
 import multiprocessing
 import os
 import re
-import sys
 from script import mkdir
 
 

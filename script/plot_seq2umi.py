@@ -11,6 +11,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plot_seq2umi(np_seq2UMI,out_file):
+    '''对分组过程检测的序列数据作图
+    参数：
+        np_seq2UMI: 分组过程检测的序列数据
+        out_file: 输出文件（png）
+    返回：
+        无
+    '''
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
     ax1.set_xlabel('No. of Sequences')
@@ -26,11 +33,11 @@ def plot_seq2umi(np_seq2UMI,out_file):
     plt.savefig(out_file,dpi=600)
 
 if __name__ == '__main__':
-    parse = argparse.ArgumentParser(description='plot umi2seq file')
+    parse = argparse.ArgumentParser(description='plot umi2seq file',
+                                    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parse.add_argument('-i','--input',required=True,help='input file(umi2seq.csv)')
     parse.add_argument('-o','--out',default='umi2seq.plot.pdf',help='output plot file.default=umi2seq.plot.pdf')
     args = parse.parse_args()
-    
     a = np.array(pd.read_csv(args.input,sep='\t',index_col=0))
     plot_seq2UMI(a,args.out)
     

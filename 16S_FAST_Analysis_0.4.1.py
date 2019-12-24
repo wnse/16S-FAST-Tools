@@ -242,12 +242,11 @@ pd.DataFrame.from_dict(seq2umi,orient='index',columns=(['umi'])).to_csv(SEQ2UMI_
 umi_seq_dir = os.path.join(ana_dir,'umi_seq')
 mkdir.mkdir(umi_seq_dir)
 logging.info(' write to umi paired seq file start')
-(umi_counts,umi_id_counts,umi2seq) = group_umi_seq.queu_group_umi_seq(A1_trime,
+umi_counts, umi_id_counts, umi2seq = group_umi_seq.queu_group_umi_seq(A1_trime,
                                                                       umi2ID,
                                                                       umi_seq_dir,
                                                                       seq2umi,
-                                                                      threads
-                                                                     )
+                                                                      threads)
 logging.info(' write to umi paired seq file end')
 #输出umi统计信息
 df_L_UMI_INFO = pd.merge(
@@ -279,8 +278,8 @@ df_L_UMI_INFO = pd.merge(
 df_L_UMI_INFO.rename(
         columns={'reads_counts':'umi2_reads_counts'},
         inplace=True)
-df_L_UMI_INFO.fillna(0,inplace=True) 
-df_L_UMI_INFO.to_csv(L_UMI_ID_FILE,sep='\t',index=False)
+df_L_UMI_INFO.fillna(0, inplace=True)
+df_L_UMI_INFO.to_csv(L_UMI_ID_FILE, sep='\t', index=False)
 logging.info(' No. of A reads after trimme:\t{}'.format(umi2seq[-1][-3]))
 logging.info(' No. of UMI ID appeared in A data:\t{}'.format(umi2seq[-1][-1]))
 sta_list.append(['11 No. of A reads after trimme:',umi2seq[-1][-3]])

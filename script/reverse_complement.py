@@ -12,8 +12,11 @@ from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna
 from Bio import SeqIO
 def reverse_complement(seq_list):
-    '''
-    sequences list reverse_complement
+    '''序列取反向互补
+    参数：
+        seq_list: 序列列表（tpye=list）
+    返回：
+        rc_list: 序列列表（type=list）
     '''
     rc_list=[]
     for seq in seq_list:
